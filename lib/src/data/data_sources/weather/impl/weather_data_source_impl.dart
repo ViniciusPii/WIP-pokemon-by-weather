@@ -25,16 +25,12 @@ class WeatherDataSourceImpl implements WeatherDataSource {
 
       return weather;
     } on AppNetworkException catch (_) {
-      throw WeatherException(
-        title: 'Sem conexão!',
-        message:
-            'Parece que você não está conectado em uma rede! Verifique a sua conexão e tente novamente!',
+      throw WeatherNetworkException(
+        message: 'Verifique a sua conexão!',
       );
     } catch (e) {
-      throw WeatherException(
-        title: 'Indisponibilidade no sitema!',
-        message:
-            'Algo deu errado ao buscar os dados da previsão do tempo, mas não se preocupe! Logo estabilizaremos nossos sistemas!',
+      throw WeatherNotFoundException(
+        message: 'Cidade nao encontrada!',
       );
     }
   }

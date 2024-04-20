@@ -19,3 +19,19 @@ class HomePokemonSuccessState extends HomePokemonState {
 
   final WeatherEntity weather;
 }
+
+class HomePokemonCityNotFoundErrorState extends HomePokemonState {
+  HomePokemonCityNotFoundErrorState({
+    required this.message,
+  });
+
+  final String message;
+}
+
+class HomePokemonWeatherNetworkErrorState extends HomePokemonState {
+  HomePokemonWeatherNetworkErrorState({
+    required this.message,
+  });
+
+  final String message;
+}
