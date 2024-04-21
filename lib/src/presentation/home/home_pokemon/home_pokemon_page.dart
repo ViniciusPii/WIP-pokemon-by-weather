@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_by_weather/src/core/theme/infra/app_dimension.dart';
 import 'package:pokemon_by_weather/src/core/ui/base_bloc_state.dart';
+import 'package:pokemon_by_weather/src/core/ui/components/app_label.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/app_title.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/snack_bar/snack_bar_component.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
@@ -67,8 +68,52 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                     );
                   }
 
-                  return const SizedBox.shrink();
+                  return const _BuildInitPage();
                 },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BuildInitPage extends StatelessWidget {
+  const _BuildInitPage();
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height * 0.74,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: AppDimension.extraLarge),
+                  AppTitle(title: 'Está pronto para capturar?!'),
+                  SizedBox(height: AppDimension.medium),
+                  AppLabel(
+                    label:
+                        'Procure uma cidade e descubra qual pokemon pode te surpreender! Spoiler!!! As coisas podem mudar por aqui dependendo do clima! Boa Sorte!',
+                    isCenter: false,
+                  ),
+                  SizedBox(height: AppDimension.medium),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: AppDimension.jumbo),
+                child: Image.asset(
+                  'assets/ash.png',
+                  height: 350,
+                ),
               ),
             ],
           ),
