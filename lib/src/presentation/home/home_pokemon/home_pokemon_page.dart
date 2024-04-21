@@ -172,7 +172,10 @@ class _BuildHeader extends StatelessWidget {
             SizedBox(
               width: 50,
               child: ElevatedButton(
-                onPressed: () => controller.getWeatherByCity(_cityEC.text),
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  controller.getWeatherByCity(_cityEC.text);
+                },
                 child: const Icon(Icons.search),
               ),
             ),
