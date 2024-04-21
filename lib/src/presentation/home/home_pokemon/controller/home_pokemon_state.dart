@@ -1,3 +1,4 @@
+import 'package:pokemon_by_weather/src/domain/entities/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 
 sealed class HomePokemonState {
@@ -15,13 +16,17 @@ class HomePokemonLoadingState extends HomePokemonState {
 class HomePokemonSuccessState extends HomePokemonState {
   HomePokemonSuccessState({
     required this.weather,
+    required this.pokemon,
   });
 
   final WeatherEntity weather;
+  final PokemonEntity pokemon;
 }
 
-class HomePokemonCityNotFoundErrorState extends HomePokemonState {
-  HomePokemonCityNotFoundErrorState({
+//Weather
+
+class HomePokemonWeatherErrorState extends HomePokemonState {
+  HomePokemonWeatherErrorState({
     required this.message,
   });
 
@@ -30,6 +35,15 @@ class HomePokemonCityNotFoundErrorState extends HomePokemonState {
 
 class HomePokemonWeatherNetworkErrorState extends HomePokemonState {
   HomePokemonWeatherNetworkErrorState({
+    required this.message,
+  });
+
+  final String message;
+}
+
+//Pokemon
+class HomePokemonErrorState extends HomePokemonState {
+  HomePokemonErrorState({
     required this.message,
   });
 

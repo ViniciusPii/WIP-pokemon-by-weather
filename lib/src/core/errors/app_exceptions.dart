@@ -8,6 +8,16 @@ class AppGenericMessageException implements Exception {
   final String message;
 }
 
+class AppNotFoundException implements Exception {}
+
+class AppNotFoundMessageException implements Exception {
+  AppNotFoundMessageException({
+    required this.message,
+  });
+
+  final String message;
+}
+
 class AppNetworkException implements Exception {}
 
 class AppNetworkMessageException implements Exception {

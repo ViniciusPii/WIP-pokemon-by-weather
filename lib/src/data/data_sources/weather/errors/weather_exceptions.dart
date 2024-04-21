@@ -1,11 +1,9 @@
 class WeatherException {
   WeatherException({
-    this.title,
-    this.message,
+    required this.message,
   });
 
-  final String? title;
-  final String? message;
+  final String message;
 }
 
 class WeatherNotFoundException {

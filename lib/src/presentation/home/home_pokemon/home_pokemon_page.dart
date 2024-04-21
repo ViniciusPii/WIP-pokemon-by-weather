@@ -32,7 +32,11 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
               BlocConsumer<HomePokemonCubit, HomePokemonState>(
                 bloc: controller,
                 listener: (context, state) {
-                  if (state is HomePokemonCityNotFoundErrorState) {
+                  if (state is HomePokemonWeatherErrorState) {
+                    return SnackBarComponent.error(context, message: state.message);
+                  }
+
+                  if (state is HomePokemonErrorState) {
                     return SnackBarComponent.error(context, message: state.message);
                   }
 
@@ -63,6 +67,10 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                             title:
                                 'Legal caçador! Você quer caçar em ${weather.city}, lá o clima está ${weather.condition}, e a temperatura está ${weather.temp}º',
                           ),
+                          const SizedBox(
+                            height: AppDimension.large,
+                          ),
+                          AppTitle(title: state.pokemon.name)
                         ],
                       ),
                     );
