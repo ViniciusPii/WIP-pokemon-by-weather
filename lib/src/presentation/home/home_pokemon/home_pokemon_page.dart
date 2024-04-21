@@ -10,6 +10,7 @@ import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_state.dart';
+import 'package:validatorless/validatorless.dart';
 
 class HomePokemonPage extends StatefulWidget {
   const HomePokemonPage({super.key});
@@ -19,7 +20,14 @@ class HomePokemonPage extends StatefulWidget {
 }
 
 class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCubit> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _cityEC = TextEditingController();
+
+  @override
+  void dispose() {
+    _cityEC.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,11 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
         child: SpacingPage(
           child: Column(
             children: [
-              _BuildHeader(cityEC: _cityEC, controller: controller),
+              _BuildHeader(
+                cityEC: _cityEC,
+                controller: controller,
+                formKey: _formKey,
+              ),
               BlocConsumer<HomePokemonCubit, HomePokemonState>(
                 bloc: controller,
                 listener: (context, state) {
@@ -133,12 +145,14 @@ class _BuildInitPage extends StatelessWidget {
 
 class _BuildHeader extends StatelessWidget {
   const _BuildHeader({
-    required TextEditingController cityEC,
+    required this.cityEC,
+    required this.formKey,
     required this.controller,
-  }) : _cityEC = cityEC;
+  });
 
-  final TextEditingController _cityEC;
   final HomePokemonCubit controller;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController cityEC;
 
   @override
   Widget build(BuildContext context) {
@@ -154,40 +168,57 @@ class _BuildHeader extends StatelessWidget {
         const SizedBox(
           height: AppDimension.extraLarge,
         ),
-        Row(
-          children: [
-            Flexible(
-              child: TextFormField(
-                controller: _cityEC,
-                decoration: InputDecoration(
-                  labelText: 'Digite a cidade que deseja caçar!',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(6),
-                    borderSide: const BorderSide(
-                      style: BorderStyle.none,
-                    ),
+        Form(
+          key: formKey,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                child: TextFormField(
+                  controller: cityEC,
+                  validator: Validatorless.multiple(
+                    [
+                      Validatorless.required('Campo obrigatório'),
+                      Validatorless.regex(
+                        RegExp(r'^[A-Za-záàâãéèêẽíìîĩóòôõúùûũüçÇs\s]+$'),
+                        'Apenas caracteres!',
+                      )
+                    ],
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 11,
-                    horizontal: 11,
+                  decoration: InputDecoration(
+                    labelText: 'Digite a cidade que deseja caçar!',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(6),
+                      borderSide: const BorderSide(
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 12,
+                      horizontal: 11,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              width: AppDimension.medium,
-            ),
-            SizedBox(
-              width: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  FocusScope.of(context).unfocus();
-                  controller.getWeatherByCity(_cityEC.text);
-                },
-                child: const Icon(Icons.search),
+              const SizedBox(
+                width: AppDimension.medium,
               ),
-            ),
-          ],
+              SizedBox(
+                width: 50,
+                height: 44,
+                child: ElevatedButton(
+                  onPressed: () {
+                    FocusScope.of(context).unfocus();
+
+                    if (formKey.currentState!.validate()) {
+                      controller.getWeatherByCity(cityEC.text);
+                    }
+                  },
+                  child: const Icon(Icons.search),
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
