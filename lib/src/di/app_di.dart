@@ -8,8 +8,10 @@ import 'package:pokemon_by_weather/src/data/repositories/pokemon/impl/pokemon_re
 import 'package:pokemon_by_weather/src/data/repositories/pokemon/pokemon_repository.dart';
 import 'package:pokemon_by_weather/src/data/repositories/weather/impl/weather_repository_impl.dart';
 import 'package:pokemon_by_weather/src/data/repositories/weather/weather_repository.dart';
+import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/get_pokemon_details_use_case.dart';
 import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/get_pokemon_type_by_temp_use_case.dart';
 import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/get_pokemons_by_type_use_case.dart';
+import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/impl/get_pokemon_details_use_case_impl.dart';
 import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/impl/get_pokemon_type_by_temp_use_case_impl.dart';
 import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/impl/get_pokemons_by_type_use_case_impl.dart';
 import 'package:pokemon_by_weather/src/domain/use_cases/weather/get_weather_by_city_use_case.dart';
@@ -68,14 +70,20 @@ class AppDI {
     di.registerLazySingleton<GetPokemonTypeByTempUseCase>(
       () => GetPokemonTypeByTempUseCaseImpl(),
     );
+
+    di.registerLazySingleton<GetPokemonDetailsUseCase>(
+      () => GetPokemonDetailsUseCaseImpl(repository: di.get()),
+    );
   }
 
   static void _configureControllers() {
     di.registerFactory(
       () => HomePokemonCubit(
-          getWeatherByCityUseCase: di.get(),
-          getPokemonTypeByTempUseCase: di.get(),
-          getPokemonsByTypeUseCase: di.get()),
+        getWeatherByCityUseCase: di.get(),
+        getPokemonDetailsUseCase: di.get(),
+        getPokemonsByTypeUseCase: di.get(),
+        getPokemonTypeByTempUseCase: di.get(),
+      ),
     );
   }
 }

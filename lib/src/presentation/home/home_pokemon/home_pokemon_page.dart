@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon_by_weather/src/app_env.dart';
 import 'package:pokemon_by_weather/src/core/theme/infra/app_dimension.dart';
 import 'package:pokemon_by_weather/src/core/ui/base_bloc_state.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/app_label.dart';
@@ -8,6 +9,7 @@ import 'package:pokemon_by_weather/src/core/ui/components/snack_bar/snack_bar_co
 import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
+import 'package:pokemon_by_weather/src/presentation/helpers/pokemon_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_state.dart';
 import 'package:validatorless/validatorless.dart';
@@ -82,7 +84,13 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                           const SizedBox(
                             height: AppDimension.large,
                           ),
-                          AppTitle(title: state.pokemon.name)
+                          AppTitle(title: state.pokemon.name),
+                          Image.network(
+                            AppEnv.pokemonImage(
+                              formatNumberWithThreeDigits(state.pokemon.id),
+                            ),
+                            height: 115,
+                          ),
                         ],
                       ),
                     );

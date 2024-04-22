@@ -1,4 +1,4 @@
-import 'package:pokemon_by_weather/src/domain/entities/pokemon_entity.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_details_entity.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 
 sealed class HomePokemonState {
@@ -20,7 +20,7 @@ class HomePokemonSuccessState extends HomePokemonState {
   });
 
   final WeatherEntity weather;
-  final PokemonEntity pokemon;
+  final PokemonDetailsEntity pokemon;
 }
 
 //Weather

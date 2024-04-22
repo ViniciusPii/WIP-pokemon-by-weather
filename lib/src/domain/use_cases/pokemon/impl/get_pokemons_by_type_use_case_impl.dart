@@ -1,5 +1,5 @@
 import 'package:pokemon_by_weather/src/data/repositories/pokemon/pokemon_repository.dart';
-import 'package:pokemon_by_weather/src/domain/entities/pokemon_entity.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/use_cases/pokemon/get_pokemons_by_type_use_case.dart';
 
 class GetPokemonsByTypeUseCaseImpl implements GetPokemonsByTypeUseCase {

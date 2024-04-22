@@ -1,6 +1,7 @@
 import 'package:pokemon_by_weather/src/data/data_sources/pokemon/pokemon_data_source.dart';
 import 'package:pokemon_by_weather/src/data/repositories/pokemon/pokemon_repository.dart';
-import 'package:pokemon_by_weather/src/domain/entities/pokemon_entity.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_details_entity.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
   PokemonRepositoryImpl({
@@ -11,5 +12,9 @@ class PokemonRepositoryImpl implements PokemonRepository {
 
   @override
   Future<List<PokemonEntity>> getPokemonsByType(String type) async =>
-      _dataSource.getPokemonsByType(type);
+      await _dataSource.getPokemonsByType(type);
+
+  @override
+  Future<PokemonDetailsEntity> getPokemonDetails(String path) async =>
+      await _dataSource.getPokemonDetails(path);
 }

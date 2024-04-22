@@ -3,8 +3,10 @@ import 'package:pokemon_by_weather/src/core/external/app_client_response.dart';
 import 'package:pokemon_by_weather/src/core/external/http_service.dart';
 import 'package:pokemon_by_weather/src/data/data_sources/pokemon/errors/pokemon_exceptions.dart';
 import 'package:pokemon_by_weather/src/data/data_sources/pokemon/pokemon_data_source.dart';
-import 'package:pokemon_by_weather/src/data/extensions/pokemon_extension.dart';
-import 'package:pokemon_by_weather/src/domain/entities/pokemon_entity.dart';
+import 'package:pokemon_by_weather/src/data/extensions/pokemon/pokemon_details_extension.dart';
+import 'package:pokemon_by_weather/src/data/extensions/pokemon/pokemon_extension.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_details_entity.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 
 class PokemonDataSourceImpl implements PokemonDataSource {
   PokemonDataSourceImpl({
@@ -25,6 +27,19 @@ class PokemonDataSourceImpl implements PokemonDataSource {
           .toList();
 
       return pokemons;
+    } catch (e) {
+      throw PokemonException(message: 'Ops! Algo deu errado! Tente novamente mais tarde!');
+    }
+  }
+
+  @override
+  Future<PokemonDetailsEntity> getPokemonDetails(String path) async {
+    try {
+      final AppClientResponse response = await _http.get(path);
+
+      final PokemonDetailsEntity pokemon = PokemonDetailsExtension.fromMap(response.data);
+
+      return pokemon;
     } catch (e) {
       throw PokemonException(message: 'Ops! Algo deu errado! Tente novamente mais tarde!');
     }
