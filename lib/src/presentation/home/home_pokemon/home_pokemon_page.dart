@@ -8,6 +8,7 @@ import 'package:pokemon_by_weather/src/core/ui/components/app_title.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/snack_bar/snack_bar_component.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
+import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
@@ -70,28 +71,51 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                   if (state is HomePokemonSuccessState) {
                     final WeatherEntity weather = state.weather;
 
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            height: AppDimension.extraLarge,
-                          ),
-                          AppTitle(
-                            title:
-                                'Legal caçador! Você quer caçar em ${weather.city}, lá o clima está ${weather.condition}, e a temperatura está ${weather.temp}º',
-                          ),
-                          const SizedBox(
-                            height: AppDimension.large,
-                          ),
-                          AppTitle(title: state.pokemon.name),
-                          Image.network(
-                            AppEnv.pokemonImage(
-                              formatNumberWithThreeDigits(state.pokemon.id),
+                    return Expanded(
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const SizedBox(
+                              height: AppDimension.extraLarge,
                             ),
-                            height: 115,
-                          ),
-                        ],
+                            AppTitle(
+                              title:
+                                  'Legal caçador! Você quer caçar em ${weather.city}, lá o clima está ${weather.condition}, e a temperatura está ${weather.temp}º',
+                            ),
+                            const SizedBox(
+                              height: AppDimension.large,
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: state.pokemons.length,
+                                itemBuilder: (context, index) {
+                                  final PokemonEntity pokemon = state.pokemons[index];
+
+                                  return Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      AppTitle(title: pokemon.name),
+                                      AppTitle(
+                                          title: formatNumberWithThreeDigits(
+                                        pokemon.id,
+                                      )),
+                                      Image.network(
+                                        AppEnv.pokemonImage(
+                                          formatNumberWithThreeDigits(
+                                            pokemon.id,
+                                          ),
+                                        ),
+                                        height: 55,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   }

@@ -1,7 +1,9 @@
 class PokemonEntity {
   PokemonEntity({
-    required this.pathDetails,
+    required this.id,
+    required this.name,
   });
 
-  final String pathDetails;
+  final String id;
+  final String name;
 }
