@@ -11,8 +11,8 @@ class PokemonRepositoryImpl implements PokemonRepository {
   final PokemonDataSource _dataSource;
 
   @override
-  Future<List<PokemonEntity>> getPokemonsByType(String type) async =>
-      await _dataSource.getPokemonsByType(type);
+  Future<List<PokemonEntity>> getPokemonUrlDetailsByType(String type) async =>
+      await _dataSource.getPokemonUrlDetailsByType(type);
 
   @override
   Future<PokemonDetailsEntity> getPokemonDetails(String path) async =>

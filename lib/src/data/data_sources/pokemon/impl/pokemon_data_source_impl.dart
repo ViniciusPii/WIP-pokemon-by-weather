@@ -16,7 +16,7 @@ class PokemonDataSourceImpl implements PokemonDataSource {
   final HttpService _http;
 
   @override
-  Future<List<PokemonEntity>> getPokemonsByType(String type) async {
+  Future<List<PokemonEntity>> getPokemonUrlDetailsByType(String type) async {
     try {
       final String baseUrl = '/type/$type';
 

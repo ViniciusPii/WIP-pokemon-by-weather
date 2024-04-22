@@ -2,6 +2,6 @@ import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_details_e
 import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 
 abstract class PokemonDataSource {
-  Future<List<PokemonEntity>> getPokemonsByType(String type);
+  Future<List<PokemonEntity>> getPokemonUrlDetailsByType(String type);
   Future<PokemonDetailsEntity> getPokemonDetails(String path);
 }
