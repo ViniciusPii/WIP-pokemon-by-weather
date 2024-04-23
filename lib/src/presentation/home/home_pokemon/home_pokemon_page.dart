@@ -8,7 +8,6 @@ import 'package:pokemon_by_weather/src/core/ui/components/app_title.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/snack_bar/snack_bar_component.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
-import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
@@ -72,7 +71,7 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                     final WeatherEntity weather = state.weather;
 
                     return Expanded(
-                      child: Center(
+                      child: SingleChildScrollView(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -84,36 +83,70 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                                   'Legal caçador! Você quer caçar em ${weather.city}, lá o clima está ${weather.condition}, e a temperatura está ${weather.temp}º',
                             ),
                             const SizedBox(
-                              height: AppDimension.large,
+                              height: AppDimension.mega,
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: state.pokemons.length,
-                                itemBuilder: (context, index) {
-                                  final PokemonEntity pokemon = state.pokemons[index];
-
-                                  return Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      AppTitle(title: pokemon.name),
-                                      AppTitle(
-                                          title: formatNumberWithThreeDigits(
-                                        pokemon.id,
-                                      )),
-                                      Image.network(
-                                        AppEnv.pokemonImage(
-                                          formatNumberWithThreeDigits(
-                                            pokemon.id,
-                                          ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                AppTitle(
+                                    title: formatNumberWithThreeDigits(
+                                  state.pokemonToCatch.id,
+                                )),
+                                Image.network(
+                                  AppEnv.pokemonImage(
+                                    formatNumberWithThreeDigits(
+                                      state.pokemonToCatch.id,
+                                    ),
+                                  ),
+                                  height: 115,
+                                ),
+                                AppTitle(title: state.pokemonToCatch.name),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: AppDimension.jumbo,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppTitle(
+                                        title: formatNumberWithThreeDigits(
+                                      state.pokemonsRunningAway[0].id,
+                                    )),
+                                    Image.network(
+                                      AppEnv.pokemonImage(
+                                        formatNumberWithThreeDigits(
+                                          state.pokemonsRunningAway[0].id,
                                         ),
-                                        height: 55,
                                       ),
-                                    ],
-                                  );
-                                },
-                              ),
-                            ),
+                                      height: 115,
+                                    ),
+                                    AppTitle(title: state.pokemonsRunningAway[0].name),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppTitle(
+                                        title: formatNumberWithThreeDigits(
+                                      state.pokemonsRunningAway[1].id,
+                                    )),
+                                    Image.network(
+                                      AppEnv.pokemonImage(
+                                        formatNumberWithThreeDigits(
+                                          state.pokemonsRunningAway[1].id,
+                                        ),
+                                      ),
+                                      height: 115,
+                                    ),
+                                    AppTitle(title: state.pokemonsRunningAway[1].name),
+                                  ],
+                                ),
+                              ],
+                            )
                           ],
                         ),
                       ),

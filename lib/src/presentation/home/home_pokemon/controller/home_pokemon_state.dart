@@ -16,11 +16,13 @@ class HomePokemonLoadingState extends HomePokemonState {
 class HomePokemonSuccessState extends HomePokemonState {
   HomePokemonSuccessState({
     required this.weather,
-    required this.pokemons,
+    required this.pokemonToCatch,
+    required this.pokemonsRunningAway,
   });
 
   final WeatherEntity weather;
-  final List<PokemonEntity> pokemons;
+  final PokemonEntity pokemonToCatch;
+  final List<PokemonEntity> pokemonsRunningAway;
 }
 
 //Weather
