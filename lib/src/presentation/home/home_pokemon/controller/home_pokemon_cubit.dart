@@ -40,6 +40,7 @@ class HomePokemonCubit extends Cubit<HomePokemonState> {
       final List<PokemonEntity> pokemonsRunningAway = await _getTwoPokemonsByTypeUseCase(type.name);
 
       emit(HomePokemonSuccessState(
+        type: type,
         weather: weather,
         pokemonToCatch: pokemonToCatch,
         pokemonsRunningAway: pokemonsRunningAway,

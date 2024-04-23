@@ -12,6 +12,7 @@ import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_state.dart';
+import 'package:pokemon_by_weather/src/routes/app_routes.dart';
 import 'package:validatorless/validatorless.dart';
 
 class HomePokemonPage extends StatefulWidget {
@@ -89,12 +90,12 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 AppTitle(
-                                    title: formatNumberWithThreeDigits(
+                                    title: PokemonHelpers.formatNumberWithThreeDigits(
                                   state.pokemonToCatch.id,
                                 )),
                                 Image.network(
                                   AppEnv.pokemonImage(
-                                    formatNumberWithThreeDigits(
+                                    PokemonHelpers.formatNumberWithThreeDigits(
                                       state.pokemonToCatch.id,
                                     ),
                                   ),
@@ -113,12 +114,12 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     AppTitle(
-                                        title: formatNumberWithThreeDigits(
+                                        title: PokemonHelpers.formatNumberWithThreeDigits(
                                       state.pokemonsRunningAway[0].id,
                                     )),
                                     Image.network(
                                       AppEnv.pokemonImage(
-                                        formatNumberWithThreeDigits(
+                                        PokemonHelpers.formatNumberWithThreeDigits(
                                           state.pokemonsRunningAway[0].id,
                                         ),
                                       ),
@@ -131,12 +132,12 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     AppTitle(
-                                        title: formatNumberWithThreeDigits(
+                                        title: PokemonHelpers.formatNumberWithThreeDigits(
                                       state.pokemonsRunningAway[1].id,
                                     )),
                                     Image.network(
                                       AppEnv.pokemonImage(
-                                        formatNumberWithThreeDigits(
+                                        PokemonHelpers.formatNumberWithThreeDigits(
                                           state.pokemonsRunningAway[1].id,
                                         ),
                                       ),
@@ -146,7 +147,18 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                                   ],
                                 ),
                               ],
-                            )
+                            ),
+                            const SizedBox(
+                              height: AppDimension.extraLarge,
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pushNamed(
+                                context,
+                                AppRoutes.pokemonList,
+                                arguments: state.type,
+                              ),
+                              child: const Text('Conheça todos pokemons'),
+                            ),
                           ],
                         ),
                       ),

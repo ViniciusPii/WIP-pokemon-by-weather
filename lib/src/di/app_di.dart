@@ -20,6 +20,7 @@ import 'package:pokemon_by_weather/src/domain/use_cases/weather/get_weather_by_c
 import 'package:pokemon_by_weather/src/domain/use_cases/weather/impl/get_weather_by_city_use_case_impl.dart';
 import 'package:pokemon_by_weather/src/external/dio_http_service_impl.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
+import 'package:pokemon_by_weather/src/presentation/pokemon_list/pokemon_list/controller/pokemon_list_cubit.dart';
 
 final GetIt di = GetIt.instance;
 
@@ -89,6 +90,12 @@ class AppDI {
         getPokemonByTypeUseCase: di.get(),
         getPokemonTypeByTempUseCase: di.get(),
         getTwoPokemonsByTypeUseCase: di.get(),
+      ),
+    );
+
+    di.registerFactory(
+      () => PokemonListCubit(
+        getPokemonsByTypeUseCase: di.get(),
       ),
     );
   }
