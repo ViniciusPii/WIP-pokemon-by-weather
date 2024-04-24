@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_by_weather/src/app_env.dart';
+import 'package:pokemon_by_weather/src/core/theme/app_styles.dart';
 import 'package:pokemon_by_weather/src/core/theme/infra/app_dimension.dart';
 import 'package:pokemon_by_weather/src/core/ui/base_bloc_state.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/app_label.dart';
@@ -9,10 +9,11 @@ import 'package:pokemon_by_weather/src/core/ui/components/snack_bar/snack_bar_co
 import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
-import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/pokemon_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/weather/weather_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_state.dart';
+import 'package:pokemon_by_weather/src/presentation/widgets/card_pokemon_widget.dart';
+import 'package:pokemon_by_weather/src/presentation/widgets/full_card_pokemon_widget.dart';
 import 'package:pokemon_by_weather/src/routes/app_routes.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -87,30 +88,9 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                             const SizedBox(
                               height: AppDimension.mega,
                             ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      state.type.style.icon,
-                                      height: AppDimension.big,
-                                      color: state.type.style.color,
-                                    ),
-                                    AppTitle(
-                                      title: state.pokemonToCatch.displayId,
-                                    ),
-                                  ],
-                                ),
-                                Image.network(
-                                  AppEnv.pokemonImage(
-                                    state.pokemonToCatch.displayId,
-                                  ),
-                                  height: 115,
-                                ),
-                                AppTitle(title: state.pokemonToCatch.displayName),
-                              ],
+                            FullCardPokemonWidget(
+                              type: state.type,
+                              pokemon: state.pokemonToCatch,
                             ),
                             const SizedBox(
                               height: AppDimension.jumbo,
@@ -118,59 +98,24 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          state.type.style.icon,
-                                          height: AppDimension.big,
-                                          color: state.type.style.color,
-                                        ),
-                                        AppTitle(
-                                          title: state.pokemonsRunningAway[0].displayId,
-                                        ),
-                                      ],
-                                    ),
-                                    Image.network(
-                                      AppEnv.pokemonImage(
-                                        state.pokemonsRunningAway[0].displayId,
-                                      ),
-                                      height: 115,
-                                    ),
-                                    AppTitle(
-                                      title: state.pokemonsRunningAway[0].displayName,
-                                    ),
-                                  ],
+                                CardPokemonWidget(
+                                  type: state.type,
+                                  pokemon: state.pokemonsRunningAway.first,
                                 ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          state.type.style.icon,
-                                          height: AppDimension.big,
-                                          color: state.type.style.color,
-                                        ),
-                                        AppTitle(
-                                          title: state.pokemonsRunningAway[1].displayId,
-                                        ),
-                                      ],
-                                    ),
-                                    Image.network(
-                                      AppEnv.pokemonImage(
-                                        state.pokemonsRunningAway[1].displayId,
-                                      ),
-                                      height: 115,
-                                    ),
-                                    AppTitle(
-                                      title: state.pokemonsRunningAway[1].displayName,
-                                    ),
-                                  ],
+                                const SizedBox(
+                                  width: AppDimension.extraLarge,
+                                ),
+                                const Icon(
+                                  Icons.compare_arrows_outlined,
+                                  size: AppDimension.big,
+                                  color: AppStyles.textColor,
+                                ),
+                                const SizedBox(
+                                  width: AppDimension.extraLarge,
+                                ),
+                                CardPokemonWidget(
+                                  type: state.type,
+                                  pokemon: state.pokemonsRunningAway.last,
                                 ),
                               ],
                             ),

@@ -167,9 +167,9 @@ extension PokemonStyleExtension on PokemonType {
         );
       case PokemonType.electric:
         return PokemonStyle(
-          color: PokemonColors.electric,
+          color: PokemonColors.electric600,
           icon: 'assets/types/electric.png',
-          colorDark: PokemonColors.electric700,
+          colorDark: PokemonColors.electric800,
           colorLight: PokemonColors.electric200,
           displayName: 'Elétrico',
         );
