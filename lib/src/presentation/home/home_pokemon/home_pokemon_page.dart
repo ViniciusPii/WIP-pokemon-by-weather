@@ -9,7 +9,8 @@ import 'package:pokemon_by_weather/src/core/ui/components/snack_bar/snack_bar_co
 import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
-import 'package:pokemon_by_weather/src/presentation/helpers/pokemon_helpers.dart';
+import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/pokemon_helpers.dart';
+import 'package:pokemon_by_weather/src/presentation/helpers/weather/weather_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_state.dart';
 import 'package:pokemon_by_weather/src/routes/app_routes.dart';
@@ -81,7 +82,7 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                             ),
                             AppTitle(
                               title:
-                                  'Legal caçador! Você quer caçar em ${weather.city}, lá o clima está ${weather.condition}, e a temperatura está ${weather.temp}º',
+                                  'Legal caçador! Você quer caçar em ${weather.city}, por aqui ${weather.conditionDisplay}, e a temperatura está ${weather.temp}º',
                             ),
                             const SizedBox(
                               height: AppDimension.mega,
@@ -89,19 +90,26 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                AppTitle(
-                                    title: PokemonHelpers.formatNumberWithThreeDigits(
-                                  state.pokemonToCatch.id,
-                                )),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      state.type.style.icon,
+                                      height: AppDimension.big,
+                                      color: state.type.style.color,
+                                    ),
+                                    AppTitle(
+                                      title: state.pokemonToCatch.displayId,
+                                    ),
+                                  ],
+                                ),
                                 Image.network(
                                   AppEnv.pokemonImage(
-                                    PokemonHelpers.formatNumberWithThreeDigits(
-                                      state.pokemonToCatch.id,
-                                    ),
+                                    state.pokemonToCatch.displayId,
                                   ),
                                   height: 115,
                                 ),
-                                AppTitle(title: state.pokemonToCatch.name),
+                                AppTitle(title: state.pokemonToCatch.displayName),
                               ],
                             ),
                             const SizedBox(
@@ -113,37 +121,55 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    AppTitle(
-                                        title: PokemonHelpers.formatNumberWithThreeDigits(
-                                      state.pokemonsRunningAway[0].id,
-                                    )),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          state.type.style.icon,
+                                          height: AppDimension.big,
+                                          color: state.type.style.color,
+                                        ),
+                                        AppTitle(
+                                          title: state.pokemonsRunningAway[0].displayId,
+                                        ),
+                                      ],
+                                    ),
                                     Image.network(
                                       AppEnv.pokemonImage(
-                                        PokemonHelpers.formatNumberWithThreeDigits(
-                                          state.pokemonsRunningAway[0].id,
-                                        ),
+                                        state.pokemonsRunningAway[0].displayId,
                                       ),
                                       height: 115,
                                     ),
-                                    AppTitle(title: state.pokemonsRunningAway[0].name),
+                                    AppTitle(
+                                      title: state.pokemonsRunningAway[0].displayName,
+                                    ),
                                   ],
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    AppTitle(
-                                        title: PokemonHelpers.formatNumberWithThreeDigits(
-                                      state.pokemonsRunningAway[1].id,
-                                    )),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          state.type.style.icon,
+                                          height: AppDimension.big,
+                                          color: state.type.style.color,
+                                        ),
+                                        AppTitle(
+                                          title: state.pokemonsRunningAway[1].displayId,
+                                        ),
+                                      ],
+                                    ),
                                     Image.network(
                                       AppEnv.pokemonImage(
-                                        PokemonHelpers.formatNumberWithThreeDigits(
-                                          state.pokemonsRunningAway[1].id,
-                                        ),
+                                        state.pokemonsRunningAway[1].displayId,
                                       ),
                                       height: 115,
                                     ),
-                                    AppTitle(title: state.pokemonsRunningAway[1].name),
+                                    AppTitle(
+                                      title: state.pokemonsRunningAway[1].displayName,
+                                    ),
                                   ],
                                 ),
                               ],

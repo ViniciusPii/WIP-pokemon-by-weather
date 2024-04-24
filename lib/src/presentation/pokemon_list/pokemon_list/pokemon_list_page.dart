@@ -8,7 +8,7 @@ import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
 import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/enums/pokemon_type.dart';
-import 'package:pokemon_by_weather/src/presentation/helpers/pokemon_helpers.dart';
+import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/pokemon_helpers.dart';
 import 'package:pokemon_by_weather/src/presentation/pokemon_list/pokemon_list/controller/pokemon_list_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/pokemon_list/pokemon_list/controller/pokemon_list_state.dart';
 
@@ -65,12 +65,27 @@ class _PokemonListPageState extends BaseBlocState<PokemonListPage, PokemonListCu
                         return Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            AppTitle(title: PokemonHelpers.formatTitle(pokemon.name)),
+                            Row(
+                              children: [
+                                Image.asset(
+                                  height: AppDimension.big,
+                                  widget.type.style.icon,
+                                  color: widget.type.style.color,
+                                ),
+                                AppTitle(
+                                  title: (pokemon.displayId),
+                                ),
+                                const SizedBox(
+                                  width: AppDimension.medium,
+                                ),
+                                AppTitle(
+                                  title: (pokemon.displayName),
+                                ),
+                              ],
+                            ),
                             Image.network(
                               AppEnv.pokemonImage(
-                                PokemonHelpers.formatNumberWithThreeDigits(
-                                  pokemon.id,
-                                ),
+                                pokemon.displayId,
                               ),
                               height: 80,
                             ),
