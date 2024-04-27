@@ -5,14 +5,14 @@ import 'package:validatorless/validatorless.dart';
 class HomeHeaderWidget extends StatelessWidget {
   const HomeHeaderWidget({
     super.key,
-    required this.action,
     required this.cityEC,
     required this.formKey,
+    required this.pokemonByCityAction,
   });
 
-  final Function() action;
   final GlobalKey<FormState> formKey;
   final TextEditingController cityEC;
+  final Function() pokemonByCityAction;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class HomeHeaderWidget extends StatelessWidget {
                     FocusScope.of(context).unfocus();
 
                     if (formKey.currentState!.validate()) {
-                      action();
+                      pokemonByCityAction();
                     }
                   },
                   child: const Icon(Icons.search),
