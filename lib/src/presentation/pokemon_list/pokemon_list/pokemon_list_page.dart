@@ -9,9 +9,9 @@ import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
 import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/enums/pokemon_type.dart';
+import 'package:pokemon_by_weather/src/presentation/components/full_card_pokemon_widget.dart';
 import 'package:pokemon_by_weather/src/presentation/pokemon_list/pokemon_list/controller/pokemon_list_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/pokemon_list/pokemon_list/controller/pokemon_list_state.dart';
-import 'package:pokemon_by_weather/src/presentation/widgets/full_card_pokemon_widget.dart';
 
 class PokemonListPage extends StatefulWidget {
   const PokemonListPage({

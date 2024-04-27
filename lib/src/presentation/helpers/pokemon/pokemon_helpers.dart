@@ -3,7 +3,7 @@ import 'package:pokemon_by_weather/src/domain/enums/pokemon_type.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/theme/pokemon_colors.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/theme/pokemon_style.dart';
 
-extension PokemonDisplayNameExtension on PokemonEntity {
+extension PokemonDisplayExtension on PokemonEntity {
   String get displayName {
     List<String> words = name.split(RegExp(r'[\s-]'));
 
@@ -18,9 +18,7 @@ extension PokemonDisplayNameExtension on PokemonEntity {
 
     return displayName;
   }
-}
 
-extension PokemonDisplayIdExtension on PokemonEntity {
   String get displayId {
     return id.padLeft(3, '0');
   }

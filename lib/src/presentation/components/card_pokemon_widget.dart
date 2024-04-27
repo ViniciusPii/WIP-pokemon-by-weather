@@ -4,8 +4,8 @@ import 'package:pokemon_by_weather/src/core/theme/infra/app_dimension.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/app_label.dart';
 import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/enums/pokemon_type.dart';
+import 'package:pokemon_by_weather/src/presentation/components/bg_rotate_widget.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/pokemon_helpers.dart';
-import 'package:pokemon_by_weather/src/presentation/widgets/bg_rotate_widget.dart';
 
 class CardPokemonWidget extends StatelessWidget {
   const CardPokemonWidget({
@@ -38,10 +38,7 @@ class CardPokemonWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: AppDimension.medium,
-                horizontal: AppDimension.extraLarge,
-              ),
+              padding: const EdgeInsets.all(AppDimension.medium),
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
