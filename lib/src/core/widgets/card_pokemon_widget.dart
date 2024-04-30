@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_by_weather/src/app_env.dart';
 import 'package:pokemon_by_weather/src/core/theme/infra/app_dimension.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/app_label.dart';
+import 'package:pokemon_by_weather/src/core/widgets/bg_rotate_widget.dart';
 import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/enums/pokemon_type.dart';
-import 'package:pokemon_by_weather/src/presentation/components/bg_rotate_widget.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/pokemon/pokemon_helpers.dart';
 
 class CardPokemonWidget extends StatelessWidget {

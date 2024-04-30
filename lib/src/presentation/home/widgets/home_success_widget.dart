@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:pokemon_by_weather/src/core/theme/app_styles.dart';
 import 'package:pokemon_by_weather/src/core/theme/infra/app_dimension.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/app_title.dart';
+import 'package:pokemon_by_weather/src/core/widgets/card_pokemon_widget.dart';
+import 'package:pokemon_by_weather/src/core/widgets/full_card_pokemon_widget.dart';
 import 'package:pokemon_by_weather/src/domain/entities/pokemon/pokemon_entity.dart';
 import 'package:pokemon_by_weather/src/domain/entities/weather_entity.dart';
 import 'package:pokemon_by_weather/src/domain/enums/pokemon_type.dart';
-import 'package:pokemon_by_weather/src/presentation/components/card_pokemon_widget.dart';
-import 'package:pokemon_by_weather/src/presentation/components/full_card_pokemon_widget.dart';
 import 'package:pokemon_by_weather/src/presentation/helpers/weather/weather_helpers.dart';
 import 'package:pokemon_by_weather/src/routes/app_routes.dart';
 
