@@ -59,13 +59,13 @@ class _PokemonListPageState extends BaseBlocState<PokemonListPage, PokemonListCu
                   const SizedBox(
                     height: AppDimension.large,
                   ),
-                  const AppTitle(title: 'Confira todos os seus pokemons!'),
+                  const AppTitle(title: 'Confira todas as possibilidades!'),
                   const SizedBox(
                     height: AppDimension.medium,
                   ),
                   const AppLabel(
                     label:
-                        'Esses são todos os pokemons que você poderia ter capturado na sua jornada! Não se preocupe se o seu preferido não apareceu, em breve ele poderá te fazer uma surpresa!',
+                        'Esses são todos os pokemons que poderiam ter aparecido na sua jornada! Não se preocupe se o seu preferido não apareceu, em breve ele poderá te fazer uma surpresa!',
                     isCenter: false,
                   ),
                   const SizedBox(

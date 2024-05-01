@@ -7,9 +7,11 @@ class HomeHeaderWidget extends StatelessWidget {
     super.key,
     required this.cityEC,
     required this.formKey,
+    required this.focusNode,
     required this.pokemonByCityAction,
   });
 
+  final FocusNode focusNode;
   final GlobalKey<FormState> formKey;
   final TextEditingController cityEC;
   final Function() pokemonByCityAction;
@@ -35,6 +37,7 @@ class HomeHeaderWidget extends StatelessWidget {
             children: [
               Flexible(
                 child: TextFormField(
+                  focusNode: focusNode,
                   controller: cityEC,
                   validator: Validatorless.multiple(
                     [
@@ -73,6 +76,8 @@ class HomeHeaderWidget extends StatelessWidget {
                     if (formKey.currentState!.validate()) {
                       pokemonByCityAction();
                     }
+
+                    cityEC.clear();
                   },
                   child: const Icon(Icons.search),
                 ),

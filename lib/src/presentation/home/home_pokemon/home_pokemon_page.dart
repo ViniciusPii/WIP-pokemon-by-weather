@@ -6,9 +6,10 @@ import 'package:pokemon_by_weather/src/core/ui/components/spacing_page.dart';
 import 'package:pokemon_by_weather/src/core/ui/components/three_bounce_component.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_cubit.dart';
 import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/controller/home_pokemon_state.dart';
-import 'package:pokemon_by_weather/src/presentation/home/widgets/home_header_widget.dart';
-import 'package:pokemon_by_weather/src/presentation/home/widgets/home_init_widget.dart';
-import 'package:pokemon_by_weather/src/presentation/home/widgets/home_success_widget.dart';
+import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/widgets/home_header_widget.dart';
+import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/widgets/home_init_widget.dart';
+import 'package:pokemon_by_weather/src/presentation/home/home_pokemon/widgets/home_success_widget.dart';
+import 'package:pokemon_by_weather/src/routes/app_routes.dart';
 
 class HomePokemonPage extends StatefulWidget {
   const HomePokemonPage({super.key});
@@ -18,6 +19,7 @@ class HomePokemonPage extends StatefulWidget {
 }
 
 class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCubit> {
+  final FocusNode _focusNode = FocusNode();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _cityEC = TextEditingController();
 
@@ -36,7 +38,10 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
             children: [
               HomeHeaderWidget(
                 cityEC: _cityEC,
-                pokemonByCityAction: () => controller.getWeatherByCity(_cityEC.text),
+                focusNode: _focusNode,
+                pokemonByCityAction: () => controller.getWeatherByCity(
+                  _cityEC.text,
+                ),
                 formKey: _formKey,
               ),
               BlocConsumer<HomePokemonCubit, HomePokemonState>(
@@ -65,10 +70,13 @@ class _HomePokemonPageState extends BaseBlocState<HomePokemonPage, HomePokemonCu
 
                   if (state is HomePokemonSuccessState) {
                     return HomeSuccessWidget(
-                      weather: state.weather,
-                      type: state.type,
-                      pokemonToCatch: state.pokemonToCatch,
-                      pokemonsRunningAway: state.pokemonsRunningAway,
+                      state: state,
+                      goToPokemonListAction: () => Navigator.of(context)
+                          .pushNamed(
+                            arguments: state.type,
+                            AppRoutes.pokemonList,
+                          )
+                          .then((_) => _focusNode.unfocus()),
                     );
                   }
 
