@@ -30,11 +30,7 @@ class DioHttpServiceImpl implements HttpService {
         throw AppNetworkException();
       }
 
-      if (e.response!.statusCode == 404) {
-        throw AppNotFoundException();
-      }
-
-      throw AppGenericException();
+      throw AppException(statusCode: e.response?.statusCode);
     }
   }
 }

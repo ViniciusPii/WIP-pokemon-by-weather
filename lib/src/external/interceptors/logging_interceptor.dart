@@ -16,6 +16,7 @@ class LoggingInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     _log('|| --> Path: ${err.requestOptions.uri}');
     _log('|| --> Message: ${err.message}');
+    _log('|| --> Status Code: ${err.response?.statusCode}');
     _log('|| --> Error Type: ${err.type.name}');
     super.onError(err, handler);
   }
